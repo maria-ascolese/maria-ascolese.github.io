@@ -20,6 +20,28 @@ body {
     font-size: 20px
 }
 
+#anim1 {
+  width: 200px;
+  height: 100px;
+  background: rgb(36, 34, 33);
+  transition: background-color 0.3s ease-out 100ms
+}
+
+#anim1:hover {
+  background-color: #FF1493;
+}
+
+#anim2 {
+  width: 200px;
+  height: 100px;
+  background: rgb(36, 34, 33);
+  transition: background-color 0.3s ease-out 100ms
+}
+
+#anim2:hover {
+  background-color: rgb(17, 181, 214);
+}
+
 h1 {
     text-align: center;
     font-size: 100px;
@@ -42,11 +64,15 @@ p {
     </header>
 
     <aside id="left">
-        prova
+        <div id="anim1">
+            prova
+        </div> 
     </aside>
-
-    <aside id="right">
-        prova
+    
+        <aside id="right">
+        <div id="anim2">
+            prova
+        </div> 
     </aside>
 
 </body>
