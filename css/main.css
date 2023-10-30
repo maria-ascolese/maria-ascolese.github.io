@@ -1,58 +1,77 @@
-/* main */
-
+/* base */
 body {
     background-color: rgb(36, 34, 33);
     color: white;
-    font-family: Amarante
+    font-family: 'Amarante', cursive;
+    margin: 0;
+    padding: 0;
+}
+
+/* text */
+h1 {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 85px;
+    font-family: 'Parisienne', cursive;
+}
+
+nav {
+    text-align: center;
+    margin: 20px 0;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-family: 'Parisienne', cursive;
+    font-size: 20px;
+}
+
+nav a:hover {
+    border-bottom: 1px solid white;
+}
+
+/* Asides */
+aside {
+    width: 45%;
+    padding: 20px;
+    float: left;
+    box-sizing: border-box;
 }
 
 #left {
-    float: left;
-    text-align: center;
-    width: 35%;
-    background-color: rgb(36, 34, 33);
-    font-size: 20px;
     border-right: 2px solid white;
-    padding: 20px
 }
 
 #right {
     float: right;
-    text-align: center;
-    width: 35%;
-    background-color: rgb(36, 34, 33);
-    font-size: 20px;
-    border-left: 2px solid white;
-    padding: 20px
 }
 
-#anim1,
-#anim2,
-#anim3 {
-  width: 400px;
-  height: 225px;
-  line-height: 225px;
-  background-size: 130%;
-  transition: 0.6s ease all
+div[id^="anim"] {
+    width: 100%;
+    height: 225px;
+    line-height: 225px;
+    text-align: center;
+    background-size: 130%;
+    transition: 0.6s ease all;
+    margin-bottom: 20px;
 }
 
 #anim1:hover {
-  background-size: 100%;
-  background-image: url("../images/anim1.png");
+    background-size: 100%;
+    background-image: url("../images/anim1.png");
 }
 
 #anim2:hover {
-  background-size: 100%;
-  background-image: url("../images/anim2.png");
+    background-size: 100%;
+    background-image: url("../images/anim2.png");
 }
 
 #anim3:hover {
-  background-size: 100%;
-  background-image: url("../images/anim3.png");
-}
-
-h1 {
-    margin-top: 0px;
-    text-align: center;
-    font-size: 85px;
+    background-size: 100%;
+    background-image: url("../images/anim3.png");
 }
