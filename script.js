@@ -10,24 +10,28 @@ document.addEventListener('DOMContentLoaded', function() {
             let mainColor = colors[index];
 
             if (index === 0) {
-                newGradientColors[0] += " 70%";
+                newGradientColors[0] += " 75%";
             } else if (index === colors.length - 1) {
-                newGradientColors[colors.length - 1] = "30% " + newGradientColors[colors.length - 1];
+                newGradientColors[colors.length - 2] += " 25%";
             } else {
-                newGradientColors.splice(index, 0, mainColor + " 70%");
+                newGradientColors.splice(index, 0, mainColor + " 75%");
             }
 
             let newGradient = `linear-gradient(to right, ${newGradientColors.join(', ')})`;
 
             document.body.style.background = newGradient;
 
+            navLinks.forEach(l => l.classList.remove('active'));
+
+            e.target.classList.add('active');
+
             document.querySelectorAll('section').forEach(function(sec) {
-                sec.style.display = "none";
+                sec.classList.remove('active');
             });
 
             let targetSection = document.querySelector(e.target.getAttribute('href'));
             if (targetSection) {
-                targetSection.style.display = "block";
+                targetSection.classList.add('active');
             }
         });
     });
