@@ -18,10 +18,14 @@ header {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }
 
+nav {
+    margin-top: 40px;
+}
+
 nav a {
     color: #FFFFFF;
     text-decoration: none;
-    margin: 0 70px;
+    margin: 70px;
     padding: 20px 16px;
     border: 1px solid transparent;
     border-radius: 45px;
