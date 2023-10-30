@@ -19,16 +19,23 @@ header {
 }
 
 nav {
-    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    margin-top: 50px;
 }
 
 nav a {
-    color: #FFFFFF;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    color: white;
     text-decoration: none;
-    margin: 70px;
-    padding: 20px 16px;
-    border: 1px solid transparent;
-    border-radius: 45px;
+    background-color: #EAEAEA;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 100px;
     transition: 0.3s;
 }
 
@@ -55,6 +62,7 @@ section {
 }
 
 footer {
+    text-align: center;
     background-color: #2a2a2a;
     padding: 20px 0;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
@@ -72,15 +80,4 @@ header, section, footer {
     -webkit-background-clip: text;
     background-clip: text;
     display: inline;
-}
-
-.contact p {
-    text-align: center;
-    font-size: 1em;
-    margin-top: 15px;
-}
-
-.contact p:nth-child(1):hover {
-   color: #E6A9F0;
-   text-decoration: underline;
 }
