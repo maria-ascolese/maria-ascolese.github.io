@@ -62,7 +62,7 @@ header, section, footer {
 }
 
 .gradient-text {
-    font-size: 30px;
+    font-size: 44px;
     background: linear-gradient(to right, #E6A9F0, #4C99BF, #5CB8B3, #74FF71, #FDE674);
     color: transparent;
     -webkit-background-clip: text;
