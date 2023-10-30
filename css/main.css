@@ -31,7 +31,7 @@ nav a {
     width: 100px;
     height: 100px;
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     text-decoration: none;
     border-radius: 50%;
     text-align: center;
