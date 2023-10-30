@@ -82,4 +82,5 @@ header, section, footer {
 
 .contact p:nth-child(1):hover {
    color: #E6A9F0;
+   text-decoration: underline;
 }
