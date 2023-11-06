@@ -73,7 +73,16 @@ nav a:nth-child(4) {
 }
 
 section {
-  visibility: hidden;
+  display: none;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing: border-box;
+  color: black;
+}
+
+section.active {
+  display: block;
 }
 
 footer {
