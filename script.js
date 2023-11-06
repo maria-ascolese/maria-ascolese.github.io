@@ -6,21 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
 
-            let newGradientColors = [...colors];
-            let mainColor = colors[index];
-
-            if (index === 0) {
-                newGradientColors[0] += " 75%";
-            } else if (index === colors.length - 1) {
-                newGradientColors[colors.length - 2] += " 25%";
-            } else {
-                newGradientColors.splice(index, 0, mainColor + " 75%");
-            }
-
-            let newGradient = `linear-gradient(to right, ${newGradientColors.join(', ')})`;
-
-            document.body.style.background = newGradient;
-
             navLinks.forEach(l => l.classList.remove('active'));
 
             e.target.classList.add('active');
