@@ -23,7 +23,15 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 70px;
+    flex-wrap: wrap;
     margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        gap: 14px;
+        margin-top: 20px;
+    }
 }
 
 nav a {
@@ -37,6 +45,15 @@ nav a {
     text-align: center;
     line-height: 100px;
     transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    nav a {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        font-size: 1rem;
+    }
 }
 
 nav a.active {
