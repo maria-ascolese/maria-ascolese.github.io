@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="post">
+  <header>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.date | date: "%d/%m/%Y" }}</p>
+
+    {% if page.categories %}
+      <p>Categorie: {{ page.categories | join: ", " }}</p>
+    {% endif %}
+
+    {% if page.tags %}
+      <p>Tag: {{ page.tags | join: ", " }}</p>
+    {% endif %}
+  </header>
+
+  <div class="content">
+    {{ content }}
+  </div>
+</article>
