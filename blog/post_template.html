@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✏️ EDIT: post-specific metadata -->
+  <title>Post Title Here — Maria Ascolese</title>
+  <meta name="description" content="A one-sentence description of what this post is about, for SEO." />
+  <meta name="author" content="Maria Ascolese" />
+  <link rel="canonical" href="https://maria-ascolese.github.io/blog/post-slug/" />
+
+  <!-- ✏️ EDIT: Open Graph -->
+  <meta property="og:title" content="Post Title Here — Maria Ascolese" />
+  <meta property="og:description" content="A one-sentence description." />
+  <meta property="og:url" content="https://maria-ascolese.github.io/blog/post-slug/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://maria-ascolese.github.io/blog/post-slug/og-image.jpg" />
+  <meta property="article:published_time" content="2025-01-01T00:00:00Z" />
+  <meta property="article:author" content="Maria Ascolese" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Post Title Here",
+    "description": "A one-sentence description.",
+    "author": {
+      "@type": "Person",
+      "name": "Maria Ascolese",
+      "url": "https://maria-ascolese.github.io/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Maria Ascolese"
+    },
+    "datePublished": "2025-01-01",
+    "dateModified": "2025-01-01",
+    "url": "https://maria-ascolese.github.io/blog/post-slug/"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0f0e0d;
+      --paper: #f5f2ee;
+      --mid: #8a8278;
+      --accent: #c85a2a;
+      --accent-soft: #f0e0d8;
+      --border: #d8d2cb;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(245,242,238,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── ARTICLE HEADER ── */
+    .article-header {
+      padding: 9rem 3rem 4rem;
+      max-width: 780px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .article-tag { color: var(--accent); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .article-title em { font-style: italic; color: var(--accent); }
+
+    .article-lead {
+      font-size: 1.15rem;
+      color: var(--mid);
+      line-height: 1.75;
+      max-width: 55ch;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article-body {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      margin: 3rem 0 1rem;
+      line-height: 1.2;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-style: italic;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--mid);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+      line-height: 1.85;
+      color: #2a2825;
+    }
+
+    .article-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-soft);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+    }
+    .article-body a:hover { text-decoration-color: var(--accent); }
+
+    .article-body strong { font-weight: 500; color: var(--ink); }
+
+    .article-body em { font-style: italic; }
+
+    .article-body ul, .article-body ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .article-body li { margin-bottom: 0.5rem; line-height: 1.8; }
+
+    .article-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 0 1rem 2rem;
+      margin: 2.5rem 0;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .article-body code {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      background: #e8e4de;
+      padding: 0.15em 0.4em;
+      border-radius: 2px;
+    }
+
+    .article-body pre {
+      background: var(--ink);
+      color: #e8e4de;
+      padding: 1.5rem 2rem;
+      overflow-x: auto;
+      margin: 2rem 0;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+    .article-body pre code {
+      background: transparent;
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    /* ── DIVIDER ── */
+    .article-divider {
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin: 3rem 0;
+      letter-spacing: 0.5em;
+    }
+
+    /* ── AUTHOR CARD ── */
+    .author-card {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+    }
+
+    .author-card-inner {
+      background: var(--accent-soft);
+      padding: 2.5rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .author-info {}
+    .author-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .author-name {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .author-bio {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+    .author-bio a { color: var(--accent); text-decoration: none; }
+    .author-bio a:hover { text-decoration: underline; }
+
+    /* ── NAV BETWEEN POSTS ── */
+    .post-nav {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .post-nav a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .post-nav a:hover { color: var(--ink); }
+
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    footer span, footer a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .article-header, .article-body, .author-card, .post-nav { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Maria Ascolese</a>
+    <ul class="nav-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/blog/">Writing</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ✏️ EDIT: Article header -->
+  <header class="article-header">
+    <div class="article-meta">
+      <span>1 January 2025</span>
+      <span class="article-tag">Data Visualization</span>
+      <span>5 min read</span>
+    </div>
+    <h1 class="article-title">Your Post Title <em>Goes Here</em></h1>
+    <p class="article-lead">
+      A compelling opening paragraph that summarizes the post and makes the reader want to keep going.
+      This shows in search results and social previews.
+    </p>
+  </header>
+
+  <!-- ✏️ EDIT: Article body — write your post here -->
+  <article class="article-body">
+
+    <p>
+      Start writing here. This is the body of your article. You can use standard HTML elements
+      for formatting: paragraphs, headings, lists, blockquotes, code blocks, etc.
+    </p>
+
+    <h2>A Section Heading</h2>
+
+    <p>
+      More content here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Phasellus imperdiet, nulla et dictum interdum.
+    </p>
+
+    <blockquote>
+      A pull quote or highlighted idea goes here. Use this for key insights or memorable phrases.
+    </blockquote>
+
+    <p>
+      Continue with your content. Reference a <a href="#">link like this</a>.
+      Use <strong>bold for emphasis</strong> and <em>italics for nuance</em>.
+    </p>
+
+    <h3>A Smaller Subheading</h3>
+
+    <p>More detail on a specific point.</p>
+
+    <!-- Code block example (for R or Python snippets) -->
+    <pre><code># Example R code
+library(ggplot2)
+
+ggplot(data, aes(x = x, y = y)) +
+  geom_point(color = "#c85a2a") +
+  theme_minimal()</code></pre>
+
+    <div class="article-divider">· · ·</div>
+
+    <p>
+      Closing thoughts. What should the reader take away? What should they do next?
+    </p>
+
+  </article>
+
+  <!-- Author card -->
+  <div class="author-card">
+    <div class="author-card-inner">
+      <div class="author-info">
+        <div class="author-label">Written by</div>
+        <div class="author-name">Maria Ascolese</div>
+        <p class="author-bio">
+          Data scientist, R developer, and co-founder & CTO of
+          <a href="https://namidi.it" target="_blank" rel="noopener">nami data intelligence</a>.
+          I write about data science, visualization, and the creative side of working with numbers.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post navigation -->
+  <nav class="post-nav" aria-label="Post navigation">
+    <!-- ✏️ EDIT: update these links when you have adjacent posts -->
+    <a href="/blog/">← All posts</a>
+    <!-- <a href="/blog/next-post/">Next post →</a> -->
+  </nav>
+
+  <footer>
+    <a href="/">← Maria Ascolese</a>
+    <span>© 2024 Maria Ascolese</span>
+  </footer>
+
+</body>
+</html>
