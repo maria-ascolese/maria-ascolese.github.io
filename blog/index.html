@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing — Maria Ascolese</title>
+  <meta name="description" content="Articles on data science, R, visualization, and the creative side of working with data. By Maria Ascolese, co-founder & CTO of nami data intelligence." />
+  <meta name="author" content="Maria Ascolese" />
+  <link rel="canonical" href="https://maria-ascolese.github.io/blog/" />
+
+  <meta property="og:title" content="Writing — Maria Ascolese" />
+  <meta property="og:description" content="Data science, visualization, and the creative side of numbers." />
+  <meta property="og:url" content="https://maria-ascolese.github.io/blog/" />
+  <meta property="og:type" content="website" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Maria Ascolese — Writing",
+    "url": "https://maria-ascolese.github.io/blog/",
+    "author": {
+      "@type": "Person",
+      "name": "Maria Ascolese",
+      "url": "https://maria-ascolese.github.io/"
+    },
+    "description": "Articles on data science, R, visualization, and the creative side of working with data."
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0f0e0d;
+      --paper: #f5f2ee;
+      --mid: #8a8278;
+      --accent: #c85a2a;
+      --accent-soft: #f0e0d8;
+      --border: #d8d2cb;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(245,242,238,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 10rem 3rem 5rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .page-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+
+    .page-intro {
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 44ch;
+      align-self: end;
+    }
+
+    /* ── FILTERS ── */
+    .filters-bar {
+      padding: 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid var(--border);
+      background: transparent;
+      padding: 0.4rem 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .filter-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+    /* ── POSTS GRID ── */
+    .posts-area {
+      padding: 5rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 6rem 0;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .empty-number {
+      font-family: var(--serif);
+      font-size: 8rem;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .empty-text {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+    }
+
+    .empty-sub {
+      font-size: 0.9rem;
+      color: var(--mid);
+      max-width: 36ch;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── POSTS LIST (for when you add posts) ── */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .post-card {
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--ink);
+      display: block;
+      transition: background 0.2s;
+    }
+    .post-card:hover { background: var(--accent-soft); }
+
+    .post-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.2rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .post-tag {
+      color: var(--accent);
+    }
+
+    .post-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .post-excerpt {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    .post-read-more {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 1.5rem;
+      display: block;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    footer span {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+    footer a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .page-header { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; }
+      .filters-bar { padding: 1.5rem; }
+      .posts-area { padding: 3rem 1.5rem; }
+      .posts-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Maria Ascolese</a>
+    <ul class="nav-links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/blog/" class="active">Writing</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <div>
+      <div class="page-eyebrow">Writing</div>
+      <h1 class="page-title">Data,<br/>told <em>well.</em></h1>
+    </div>
+    <p class="page-intro">
+      Essays and explorations at the intersection of data science and creative work —
+      from R tutorials and visualization deep-dives to the culture and aesthetics of data.
+    </p>
+  </header>
+
+  <div class="filters-bar">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Data Visualization</button>
+    <button class="filter-btn">Machine Learning</button>
+    <button class="filter-btn">R</button>
+    <button class="filter-btn">Data & Culture</button>
+    <button class="filter-btn">Political Analytics</button>
+  </div>
+
+  <main class="posts-area">
+    <!-- EMPTY STATE — remove this block when you add posts -->
+    <div class="empty-state">
+      <div class="empty-number">00</div>
+      <div class="empty-text">No posts yet</div>
+      <p class="empty-sub">
+        Articles are coming. This is where data science
+        meets storytelling — check back soon.
+      </p>
+    </div>
+
+    <!-- POSTS GRID — uncomment and populate when you have posts
+    <div class="posts-grid">
+      <a href="blog/post-slug/" class="post-card">
+        <div class="post-meta">
+          <span>15 May 2025</span>
+          <span class="post-tag">Data Visualization</span>
+        </div>
+        <h2 class="post-title">Your Post Title Here</h2>
+        <p class="post-excerpt">A short excerpt or intro sentence that draws the reader in...</p>
+        <span class="post-read-more">Read →</span>
+      </a>
+    </div>
+    -->
+  </main>
+
+  <footer>
+    <a href="/">← Back to home</a>
+    <span>© 2024 Maria Ascolese</span>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
