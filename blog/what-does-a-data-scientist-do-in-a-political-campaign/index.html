@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Does a Data Scientist Actually Do in a Political Campaign? — Maria Ascolese</title>
+  <meta name="description" content="A data scientist working in politics doesn't just crunch polls. From NLP on media coverage to voter sentiment modeling, here's what the work actually looks like." />
+  <meta name="author" content="Maria Ascolese" />
+  <link rel="canonical" href="https://maria-ascolese.github.io/blog/what-does-a-data-scientist-do-in-a-political-campaign/" />
+
+  <meta property="og:title" content="What Does a Data Scientist Actually Do in a Political Campaign?" />
+  <meta property="og:description" content="From NLP on media coverage to voter sentiment modeling — what political data science really looks like from the inside." />
+  <meta property="og:url" content="https://maria-ascolese.github.io/blog/what-does-a-data-scientist-do-in-a-political-campaign/" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2025-01-15T00:00:00Z" />
+  <meta property="article:author" content="Maria Ascolese" />
+  <meta property="article:tag" content="Political Analytics" />
+  <meta property="article:tag" content="Data Science" />
+  <meta property="article:tag" content="NLP" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Does a Data Scientist Actually Do in a Political Campaign?" />
+  <meta name="twitter:description" content="From NLP on media coverage to voter sentiment modeling — what the work really looks like." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What Does a Data Scientist Actually Do in a Political Campaign?",
+    "description": "A data scientist working in politics doesn't just crunch polls. From NLP on media coverage to voter sentiment modeling, here's what the work actually looks like.",
+    "author": {
+      "@type": "Person",
+      "name": "Maria Ascolese",
+      "url": "https://maria-ascolese.github.io/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Maria Ascolese"
+    },
+    "datePublished": "2025-01-15",
+    "dateModified": "2025-01-15",
+    "url": "https://maria-ascolese.github.io/blog/what-does-a-data-scientist-do-in-a-political-campaign/",
+    "keywords": ["political data science", "data scientist political campaign", "NLP politics", "sentiment analysis politics", "political analytics"],
+    "articleSection": "Political Analytics"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0f0e0d;
+      --paper: #f5f2ee;
+      --mid: #8a8278;
+      --accent: #c85a2a;
+      --accent-soft: #f0e0d8;
+      --border: #d8d2cb;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(245,242,238,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .article-header {
+      padding: 9rem 3rem 4rem;
+      max-width: 780px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .article-tag { color: var(--accent); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .article-title em { font-style: italic; color: var(--accent); }
+
+    .article-lead {
+      font-size: 1.1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    .article-body {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 300;
+      margin: 3.5rem 0 1rem;
+      line-height: 1.2;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      font-style: italic;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--mid);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+      line-height: 1.85;
+      color: #2a2825;
+      font-size: 1.02rem;
+    }
+
+    .article-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-soft);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+    }
+    .article-body a:hover { text-decoration-color: var(--accent); }
+
+    .article-body strong { font-weight: 500; color: var(--ink); }
+    .article-body em { font-style: italic; }
+
+    .article-body ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .article-body li {
+      margin-bottom: 0.6rem;
+      line-height: 1.8;
+      color: #2a2825;
+      font-size: 1.02rem;
+    }
+
+    .article-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 0 1rem 2rem;
+      margin: 2.5rem 0;
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .callout {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+    }
+    .callout p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+    }
+    .callout-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .article-divider {
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin: 3rem 0;
+      letter-spacing: 0.5em;
+    }
+
+    .author-card {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+    }
+    .author-card-inner {
+      background: var(--accent-soft);
+      padding: 2rem 2.5rem;
+    }
+    .author-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .author-name {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .author-bio {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+    .author-bio a { color: var(--accent); text-decoration: none; }
+    .author-bio a:hover { text-decoration: underline; }
+
+    .post-nav {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+    .post-nav a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .post-nav a:hover { color: var(--ink); }
+
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+    footer span, footer a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--mid);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .article-header, .article-body, .author-card, .post-nav { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Maria Ascolese</a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="article-header">
+  <div class="article-meta">
+    <span>15 January 2025</span>
+    <span class="article-tag">Political Analytics</span>
+    <span>8 min read</span>
+  </div>
+  <h1 class="article-title">What Does a Data Scientist <em>Actually</em> Do in a Political Campaign?</h1>
+  <p class="article-lead">
+    Not poll aggregation. Not election forecasting. The real work is messier, more creative,
+    and far more interesting than the public narrative suggests.
+  </p>
+</header>
+
+<article class="article-body">
+
+  <p>
+    When people hear "data science" and "politics" in the same sentence, they picture one of two things:
+    a room full of statisticians refreshing FiveThirtyEight, or the spectre of Cambridge Analytica.
+    Both images are unhelpful. The first is too narrow. The second is too dramatic.
+    The actual day-to-day work of a data scientist supporting a political client sits somewhere
+    far less cinematic — and, I'd argue, far more interesting.
+  </p>
+
+  <p>
+    I've spent years doing this work in Italy, across parties and campaigns of different sizes.
+    What follows is not a methodological paper. It's an honest account of what the job looks like,
+    what questions you're actually trying to answer, and where data science genuinely helps
+    versus where it flatters itself.
+  </p>
+
+  <h2>The question nobody asks you to answer</h2>
+
+  <p>
+    Political clients rarely walk in with clean analytical questions. They walk in with anxieties.
+    "Are we being covered fairly?" "Why did our numbers drop last week?" "Is this scandal
+    actually hurting us or does it feel worse than it is?"
+  </p>
+
+  <p>
+    The first job of a political data scientist is translation: turning a political anxiety
+    into something measurable. That's not a technical skill. It's a mix of domain knowledge,
+    communication, and a willingness to say "I can answer a version of that question,
+    but not exactly that one."
+  </p>
+
+  <p>
+    "Are we being covered fairly?" becomes: what is the ratio of negative to neutral to positive
+    framing in coverage mentioning our candidate, compared to our main opponent, over the last 30 days,
+    broken down by outlet type?
+  </p>
+
+  <p>
+    That is answerable. And the answer is almost always more nuanced than the client feared.
+  </p>
+
+  <h2>What media monitoring actually involves</h2>
+
+  <p>
+    A large portion of political data work is media analysis. Not reading articles — processing them
+    at scale. A national campaign in Italy might generate thousands of press mentions per week
+    across print, online, TV transcripts, and radio. No human team reads all of it with consistency.
+  </p>
+
+  <p>
+    The pipeline typically looks like this: scraping or ingesting content from agreed sources,
+    cleaning and deduplicating, running entity recognition to confirm the article is actually
+    about your candidate and not someone with a similar name, then applying sentiment classification
+    and topic modeling to understand not just tone but <em>what the coverage is about</em>.
+  </p>
+
+  <div class="callout">
+    <div class="callout-label">Worth noting</div>
+    <p>
+      Sentiment analysis on political text is genuinely hard. General-purpose models trained on
+      product reviews or social media perform poorly on political language, which is dense with
+      irony, hedging, and domain-specific framing. Fine-tuning on domain-specific data,
+      or at minimum careful validation on a labeled sample, is not optional — it's the difference
+      between a useful tool and a confident one that's wrong.
+    </p>
+  </div>
+
+  <p>
+    The output is rarely a single number. It's a dashboard that lets a communications team
+    ask questions interactively: which outlets are driving negative framing? On which topics
+    is coverage most polarized? Did a specific event produce a measurable shift in tone,
+    and if so, for how long did the effect last?
+  </p>
+
+  <h2>Social media: the gap between volume and relevance</h2>
+
+  <p>
+    Social media monitoring is where political data science is most oversold and most
+    misunderstood. Volume metrics — mentions, impressions, follower counts — are easy to produce
+    and almost always misleading as proxies for actual political sentiment.
+  </p>
+
+  <p>
+    The people most active on political Twitter or Instagram are not representative of the
+    electorate. They are, systematically, more ideologically committed, more extreme,
+    and more likely to be organized. A spike in negative mentions from a motivated opponent
+    base is not the same as a shift in public opinion. Conflating the two has led to some
+    spectacular miscalculations by campaigns that optimized for online engagement
+    while losing actual votes.
+  </p>
+
+  <blockquote>
+    The question is never "what are people saying online?" The question is "which people,
+    on which platforms, and does it map to anyone whose vote you're trying to win?"
+  </blockquote>
+
+  <p>
+    Better questions for social data: what topics are being raised by users who don't
+    follow the candidate yet? Where are organic mentions coming from geographically?
+    What language do supporters use unprompted — as opposed to the language the campaign
+    uses — and is there a gap worth closing?
+  </p>
+
+  <h2>Polls, models, and the limits of prediction</h2>
+
+  <p>
+    Election forecasting gets the most press, but it's a relatively small part of the
+    practical work. Most clients aren't running national elections where sophisticated
+    forecasting models make sense. They're regional, they have limited polling budgets,
+    and what they need is not a probability distribution over outcomes but an understanding
+    of which issues are moving, and for which segments of voters.
+  </p>
+
+  <p>
+    The most useful quantitative work I've done in political contexts wasn't forecasting
+    who would win. It was segmentation: understanding that the same issue lands differently
+    depending on whether you're talking to voters in industrial northern constituencies
+    versus rural southern ones, and that the communication that resonates with one group
+    actively alienates another. That's a data problem. It's also, fundamentally,
+    a listening problem.
+  </p>
+
+  <h2>The part no one talks about: the communication layer</h2>
+
+  <p>
+    Here is the unglamorous truth: the analytical output is almost never the hard part.
+    Political clients are not data-native. They work on instinct, on relationships,
+    on decades of reading rooms. Walking into a strategy meeting with a model output
+    and expecting it to change minds is a reliable way to be ignored.
+  </p>
+
+  <p>
+    The skill that actually creates value is knowing how to present an insight so that
+    it connects to decisions the client is already facing. Not "our NLP model shows a
+    0.3 standard deviation shift in sentiment on the healthcare topic." But: "coverage
+    of healthcare has gotten notably worse over the past two weeks, and it's concentrated
+    in three outlets that reach exactly the voter segment you're most worried about.
+    Here's what they're focusing on."
+  </p>
+
+  <p>
+    Data science in politics is, in the end, a translation practice. You translate
+    political anxiety into measurable questions. You translate messy data into structured
+    signals. And you translate analytical findings into language that connects to
+    the judgment of people who make decisions for a living.
+  </p>
+
+  <p>
+    The statistics are the easy part. The translation is the job.
+  </p>
+
+  <div class="article-divider">· · ·</div>
+
+  <p>
+    <em>
+      At <a href="https://namidi.it" target="_blank" rel="noopener">Nami</a>, we work with
+      political and institutional clients on media monitoring, sentiment analysis, and
+      communication strategy grounded in data. If you're working on a campaign or public
+      affairs mandate and want to talk, <a href="/#contact">get in touch</a>.
+    </em>
+  </p>
+
+</article>
+
+<div class="author-card">
+  <div class="author-card-inner">
+    <div class="author-label">Written by</div>
+    <div class="author-name">Maria Ascolese</div>
+    <p class="author-bio">
+      Data scientist, R developer, and co-founder & CTO of
+      <a href="https://namidi.it" target="_blank" rel="noopener">Nami - Data Intelligence</a>.
+      I write about data science, political analytics, and the creative side of working with numbers.
+    </p>
+  </div>
+</div>
+
+<nav class="post-nav" aria-label="Post navigation">
+  <a href="/blog/">← All posts</a>
+</nav>
+
+<footer>
+  <a href="/">← Maria Ascolese</a>
+  <span>© 2026 Maria Ascolese</span>
+</footer>
+
+</body>
+</html>
