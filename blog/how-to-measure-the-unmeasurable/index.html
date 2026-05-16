@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Measure the Unmeasurable: Proxy Variables and Creative Analytics — Maria Ascolese</title>
+  <meta name="description" content="You can't measure trust, satisfaction, or quality directly. But you can measure things that reliably track them. A practical guide to proxy variables — the most creative tool in data science." />
+  <meta name="author" content="Maria Ascolese" />
+  <link rel="canonical" href="https://maria-ascolese.github.io/blog/how-to-measure-the-unmeasurable/" />
+
+  <meta property="og:title" content="How to Measure the Unmeasurable: Proxy Variables and Creative Analytics" />
+  <meta property="og:description" content="You can't measure trust, satisfaction, or quality directly. But you can measure things that reliably track them." />
+  <meta property="og:url" content="https://maria-ascolese.github.io/blog/how-to-measure-the-unmeasurable/" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2025-03-05T00:00:00Z" />
+  <meta property="article:author" content="Maria Ascolese" />
+  <meta property="article:tag" content="Data Science" />
+  <meta property="article:tag" content="Analytics" />
+  <meta property="article:tag" content="Measurement" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Measure the Unmeasurable" />
+  <meta name="twitter:description" content="You can't measure trust, satisfaction, or quality directly. But you can measure things that reliably track them." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How to Measure the Unmeasurable: Proxy Variables and Creative Analytics",
+    "description": "You can't measure trust, satisfaction, or quality directly. But you can measure things that reliably track them. A practical guide to proxy variables — the most creative tool in data science.",
+    "author": {
+      "@type": "Person",
+      "name": "Maria Ascolese",
+      "url": "https://maria-ascolese.github.io/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Maria Ascolese"
+    },
+    "datePublished": "2025-03-05",
+    "dateModified": "2025-03-05",
+    "url": "https://maria-ascolese.github.io/blog/how-to-measure-the-unmeasurable/",
+    "keywords": ["proxy variables data science", "how to measure intangible things", "creative analytics", "indirect measurement", "proxy metrics", "misurare cose immateriali"],
+    "articleSection": "Data Science"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0f0e0d;
+      --paper: #f5f2ee;
+      --mid: #8a8278;
+      --accent: #c85a2a;
+      --accent-soft: #f0e0d8;
+      --border: #d8d2cb;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; text-decoration: none; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(245,242,238,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .article-header {
+      padding: 9rem 3rem 4rem;
+      max-width: 780px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .article-tag { color: var(--accent); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .article-title em { font-style: italic; color: var(--accent); }
+
+    .article-lead {
+      font-size: 1.1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    .article-body {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+    }
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 300;
+      margin: 3.5rem 0 1rem;
+      line-height: 1.2;
+    }
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      font-style: italic;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--mid);
+    }
+    .article-body p {
+      margin-bottom: 1.5rem;
+      line-height: 1.85;
+      color: #2a2825;
+      font-size: 1.02rem;
+    }
+    .article-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-soft);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+    }
+    .article-body a:hover { text-decoration-color: var(--accent); }
+    .article-body strong { font-weight: 500; color: var(--ink); }
+    .article-body em { font-style: italic; }
+    .article-body ul, .article-body ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .article-body li {
+      margin-bottom: 0.6rem;
+      line-height: 1.8;
+      color: #2a2825;
+      font-size: 1.02rem;
+    }
+    .article-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 0 1rem 2rem;
+      margin: 2.5rem 0;
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    /* ── PROXY DIAGRAM ── */
+    .diagram-block {
+      margin: 3rem 0;
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      background: #fff;
+    }
+    .diagram-title {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── PROXY TABLE ── */
+    .proxy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2.5rem 0;
+      font-size: 0.92rem;
+    }
+    .proxy-table th {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-align: left;
+      padding: 0.6rem 1rem 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .proxy-table td {
+      padding: 0.9rem 1rem 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      color: #2a2825;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    .proxy-table tr:last-child td { border-bottom: none; }
+    .proxy-table td:first-child { font-style: italic; color: var(--ink); min-width: 140px; }
+    .proxy-table td:nth-child(2) {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--accent);
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+    }
+    .callout-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .callout p { margin-bottom: 0; font-size: 0.95rem; }
+
+    /* ── CRITERIA LIST ── */
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin: 2.5rem 0;
+      border: 1px solid var(--border);
+    }
+    .criteria-item {
+      padding: 1.5rem;
+      border: 0.5px solid var(--border);
+    }
+    .criteria-num {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .criteria-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .criteria-desc {
+      font-size: 0.85rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .article-divider {
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin: 3rem 0;
+      letter-spacing: 0.5em;
+    }
+
+    /* ── CHART ── */
+    .chart-block {
+      margin: 3rem 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+    .chart-title {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.5rem;
+    }
+    .chart-subtitle {
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .chart-source {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      margin-top: 1rem;
+    }
+
+    .author-card {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+    }
+    .author-card-inner {
+      background: var(--accent-soft);
+      padding: 2rem 2.5rem;
+    }
+    .author-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .author-name {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .author-bio {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+    .author-bio a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: text-decoration-color 0.2s;
+    }
+    .author-bio a:hover { text-decoration-color: var(--accent); }
+
+    .post-nav {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+    .post-nav a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+    .post-nav a:hover { color: var(--ink); }
+
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+    footer span, footer a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--mid);
+    }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .article-header, .article-body, .author-card, .post-nav { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .criteria-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Maria Ascolese</a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="article-header">
+  <div class="article-meta">
+    <span>5 March 2025</span>
+    <span class="article-tag">Data Science</span>
+    <span class="article-tag">Analytics</span>
+    <span>9 min read</span>
+  </div>
+  <h1 class="article-title">How to Measure <em>the Unmeasurable</em></h1>
+  <p class="article-lead">
+    You cannot put a sensor on trust. You cannot directly observe satisfaction, quality,
+    or intelligence. But you can measure things that reliably track them.
+    Proxy variables are the most creative tool in data science — and the most misused.
+  </p>
+</header>
+
+<article class="article-body">
+
+  <p>
+    Every data project eventually runs into the same wall: the thing you actually care about
+    cannot be measured directly. You want to understand customer satisfaction, but satisfaction
+    is a mental state. You want to track product quality, but quality is a judgment.
+    You want to measure the effectiveness of a political message, but effectiveness lives
+    in the minds of people who haven't told you anything yet.
+  </p>
+
+  <p>
+    This is not a failure of data. It is the normal condition of working with data
+    on anything that matters. The concepts worth measuring are almost always
+    too complex, too private, or too intangible to observe directly.
+    What you can observe are <strong>traces</strong> — behaviors, signals, side effects
+    that correlate with the thing you care about strongly enough to serve as a stand-in.
+    These are called proxy variables. And choosing the right one is less a statistical
+    decision than a creative one.
+  </p>
+
+  <h2>What a proxy variable actually is</h2>
+
+  <p>
+    A proxy variable is any measurable quantity used in place of something that cannot
+    be measured directly. The formal definition from the
+    <a href="https://methods.sagepub.com/reference/the-sage-encyclopedia-of-social-science-research-methods/n768.xml" target="_blank" rel="noopener">
+    SAGE Encyclopedia of Social Science Research Methods</a> is precise:
+    "a variable that is used to measure an unobservable quantity of interest."
+    A good proxy is strongly correlated with the target concept.
+    A bad proxy looks correlated but actually measures something else,
+    or measures the right thing in the wrong conditions.
+  </p>
+
+  <p>
+    The concept is everywhere in data science, often without the name.
+    GDP as a proxy for wellbeing. IQ scores as a proxy for intelligence.
+    Completion rate as a proxy for content quality.
+    Return rate as a proxy for product satisfaction.
+    Every time you use a measurable signal to stand in for an unmeasurable concept,
+    you are using a proxy — whether you call it that or not.
+  </p>
+
+  <div class="diagram-block">
+    <div class="diagram-title">Concept → proxy → what you actually measure</div>
+    <svg width="100%" viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg" role="img">
+      <title>Diagram showing how unmeasurable concepts map to proxy variables and then to observable data</title>
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#c85a2a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <!-- Box 1: Concept -->
+      <rect x="40" y="60" width="160" height="60" rx="4" fill="#f0e0d8" stroke="#c85a2a" stroke-width="0.8"/>
+      <text x="120" y="84" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-style="italic" fill="#0f0e0d">Unmeasurable</text>
+      <text x="120" y="104" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" font-style="italic" fill="#0f0e0d">concept</text>
+      <!-- Arrow 1 -->
+      <line x1="200" y1="90" x2="258" y2="90" stroke="#c85a2a" stroke-width="1" marker-end="url(#arr)"/>
+      <text x="229" y="82" text-anchor="middle" font-family="'DM Mono', monospace" font-size="9" fill="#8a8278" letter-spacing="0.05em">choose</text>
+      <!-- Box 2: Proxy -->
+      <rect x="260" y="60" width="160" height="60" rx="4" fill="#f5f2ee" stroke="#d8d2cb" stroke-width="0.8"/>
+      <text x="340" y="84" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" fill="#0f0e0d">Proxy</text>
+      <text x="340" y="104" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" fill="#0f0e0d">variable</text>
+      <!-- Arrow 2 -->
+      <line x1="420" y1="90" x2="478" y2="90" stroke="#c85a2a" stroke-width="1" marker-end="url(#arr)"/>
+      <text x="449" y="82" text-anchor="middle" font-family="'DM Mono', monospace" font-size="9" fill="#8a8278" letter-spacing="0.05em">measure</text>
+      <!-- Box 3: Observable -->
+      <rect x="480" y="60" width="160" height="60" rx="4" fill="#f5f2ee" stroke="#d8d2cb" stroke-width="0.8"/>
+      <text x="560" y="84" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" fill="#0f0e0d">Observable</text>
+      <text x="560" y="104" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="15" fill="#0f0e0d">data</text>
+      <!-- Labels below -->
+      <text x="120" y="148" text-anchor="middle" font-family="'DM Mono', monospace" font-size="9" fill="#c85a2a" letter-spacing="0.06em">TRUST, QUALITY...</text>
+      <text x="340" y="148" text-anchor="middle" font-family="'DM Mono', monospace" font-size="9" fill="#8a8278" letter-spacing="0.06em">RETURN RATE, DROPOUT...</text>
+      <text x="560" y="148" text-anchor="middle" font-family="'DM Mono', monospace" font-size="9" fill="#8a8278" letter-spacing="0.06em">ROWS IN A DATABASE</text>
+    </svg>
+  </div>
+
+  <h2>Three cases worth examining closely</h2>
+
+  <h3>Netflix: the dropout point</h3>
+
+  <p>
+    Netflix cannot directly measure whether you enjoyed a film.
+    Enjoyment happens inside a viewer's mind. But Netflix can measure
+    <em>where</em> you stopped watching, and what you did next.
+  </p>
+
+  <p>
+    According to Netflix's own engineering writing on their recommendation systems,
+    the company treats behavioral signals — completion rate, time to abandon,
+    whether you returned to a title after pausing, whether you watched more content
+    in the same genre afterward — as proxies for satisfaction.
+    A viewer who finishes a season in a single day is a strong satisfaction signal.
+    A viewer who abandons a film after ten minutes is ambiguous: they might have been
+    interrupted, or they might have given up. The point of abandonment matters.
+    Dropping out at the beginning reads differently from dropping out at the midpoint
+    of an episode you've been watching for weeks.
+  </p>
+
+  <p>
+    The sophistication is in reading these signals together, not individually.
+    No single behavior is a clean proxy. But a pattern of behaviors — start, pause,
+    return, complete, explore similar content — gives a picture of engagement
+    that correlates well with what people actually report when asked directly.
+  </p>
+
+  <h3>Amazon: returns as a quality signal</h3>
+
+  <p>
+    Amazon tracks return rates at the product level as a proxy for quality.
+    The logic is direct: if a significant fraction of buyers return a product,
+    something about it did not meet expectations — whether because the product
+    is genuinely defective, because the listing was misleading, or because
+    the product-market fit was wrong.
+  </p>
+
+  <p>
+    Amazon's internal metric system distinguishes between types of returns —
+    including what it calls NCX (Not as Customer Expected) returns,
+    which specifically flag cases where the product did not match
+    the buyer's reasonable expectations based on the listing.
+    A high NCX return rate is a proxy for a specific kind of quality failure:
+    not that the product is bad in absolute terms, but that it was misrepresented.
+    That distinction is analytically meaningful and leads to different remedies.
+  </p>
+
+  <h3>GDP: the proxy that ate the concept</h3>
+
+  <p>
+    Gross domestic product was designed to measure economic output.
+    Over time it became a proxy for national wellbeing, prosperity, and the success
+    of governments. This is a textbook example of a proxy that outgrew its original purpose.
+  </p>
+
+  <p>
+    GDP does not measure whether people are healthy, educated, safe, or satisfied
+    with their lives. It does not distinguish between spending that creates value
+    and spending that repairs damage. A country recovering from a natural disaster
+    shows rising GDP. A country with high inequality may show strong GDP growth
+    while median living standards stagnate.
+  </p>
+
+  <p>
+    The problem is not that GDP is a bad measure of output — it is a fine measure
+    of output. The problem is that it became the default answer to questions
+    it was never designed to answer. This happens when a proxy becomes so
+    entrenched that people forget it is a proxy.
+  </p>
+
+  <blockquote>
+    The danger is not choosing the wrong proxy. The danger is forgetting
+    that you chose one at all.
+  </blockquote>
+
+  <h2>A table worth keeping</h2>
+
+  <table class="proxy-table">
+    <thead>
+      <tr>
+        <th>What you want to measure</th>
+        <th>Common proxy</th>
+        <th>What it misses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Customer satisfaction</td>
+        <td>NPS / star rating</td>
+        <td>Only captures respondents; mood effects ratings (see: rain)</td>
+      </tr>
+      <tr>
+        <td>Content quality</td>
+        <td>Completion rate</td>
+        <td>Completion can mean compulsion, not enjoyment</td>
+      </tr>
+      <tr>
+        <td>Product quality</td>
+        <td>Return rate</td>
+        <td>Returns also reflect listing accuracy and buyer expectations</td>
+      </tr>
+      <tr>
+        <td>National wellbeing</td>
+        <td>GDP per capita</td>
+        <td>Distribution, health, safety, environment, time</td>
+      </tr>
+      <tr>
+        <td>Political support</td>
+        <td>Social media mentions</td>
+        <td>Online vocal minority ≠ general electorate</td>
+      </tr>
+      <tr>
+        <td>Intelligence</td>
+        <td>IQ score</td>
+        <td>Specific test-taking skills; cultural and linguistic bias</td>
+      </tr>
+      <tr>
+        <td>Employee engagement</td>
+        <td>Survey responses</td>
+        <td>Social desirability bias; non-responders differ from responders</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>What makes a good proxy</h2>
+
+  <p>
+    Not all proxies are equal. The choice of proxy is both a technical and a creative decision —
+    and getting it wrong can lead an entire organization to optimize for the wrong thing.
+    Here are the criteria I apply when evaluating a proxy variable in practice.
+  </p>
+
+  <div class="criteria-grid">
+    <div class="criteria-item">
+      <div class="criteria-num">01</div>
+      <div class="criteria-title">Genuine correlation</div>
+      <div class="criteria-desc">The proxy must actually track the concept of interest across a range of conditions, not just in the data you first observed it in. Validate on held-out data.</div>
+    </div>
+    <div class="criteria-item">
+      <div class="criteria-num">02</div>
+      <div class="criteria-title">Correct direction</div>
+      <div class="criteria-desc">More of the proxy should mean more (or less) of the concept, consistently. A proxy that reverses direction under certain conditions is a liability.</div>
+    </div>
+    <div class="criteria-item">
+      <div class="criteria-num">03</div>
+      <div class="criteria-title">Not gameable</div>
+      <div class="criteria-desc">Once a proxy becomes a target, people optimize for it directly. A good proxy should be hard to inflate without actually improving the underlying concept.</div>
+    </div>
+    <div class="criteria-item">
+      <div class="criteria-num">04</div>
+      <div class="criteria-title">Interpretable failure modes</div>
+      <div class="criteria-desc">You should be able to describe the specific conditions under which the proxy breaks down. If you can't, you don't understand it well enough to use it.</div>
+    </div>
+  </div>
+
+  <p>
+    The third criterion deserves extra attention. It is a restatement of
+    <strong>Goodhart's Law</strong>: "When a measure becomes a target, it ceases to be a good measure."
+    Return rate is a reasonable proxy for product quality — until sellers discover
+    they can reduce return rates by making returns harder.
+    Completion rate is a reasonable proxy for content quality — until content is
+    designed to be compulsive rather than valuable.
+    The proxy holds until the system learns to optimize for it directly.
+  </p>
+
+  <div class="chart-block">
+    <div class="chart-title">Goodhart's Law in practice</div>
+    <div class="chart-subtitle">As a proxy metric becomes a primary target, its correlation with the underlying concept it was designed to track tends to degrade</div>
+    <div style="position: relative; width: 100%; height: 260px;">
+      <canvas id="goodhartChart" role="img" aria-label="Line chart showing two trends over time: proxy metric quality improving linearly while correlation with underlying concept degrades after the metric becomes a target.">Conceptual illustration of Goodhart's Law: proxy metric improves over time as organizations optimize for it, while its correlation with the underlying concept it was designed to measure gradually weakens.</canvas>
+    </div>
+    <div class="chart-source">Illustrative model of Goodhart's Law. Not empirical data.</div>
+  </div>
+
+  <h2>The creative part</h2>
+
+  <p>
+    The technical requirements of a good proxy — correlation, stability, interpretability —
+    are necessary but not sufficient. The harder part is imagination: looking at a concept
+    you want to measure and asking, genuinely openly, what traces it leaves in the world
+    that you could collect.
+  </p>
+
+  <p>
+    Urban planners trying to measure the vitality of a neighborhood might look at
+    the number of lit windows at 10pm. Epidemiologists trying to track disease prevalence
+    before test results are available look at search query patterns.
+    Researchers trying to measure economic activity in real time look at
+    satellite images of commercial parking lots and port shipping volume.
+    None of these are obvious. All of them required someone to stop asking
+    "how do I measure this thing" and start asking "what does this thing leave behind?"
+  </p>
+
+  <p>
+    That shift in framing is, I think, what distinguishes useful data work from
+    merely competent data work. The tools and methods are learnable.
+    The willingness to sit with a hard measurement problem and ask genuinely creative
+    questions about it — that is what turns a dataset into an insight.
+  </p>
+
+  <p>
+    Data does not contain truth. It contains traces.
+    The work is learning to read them.
+  </p>
+
+  <div class="article-divider">· · ·</div>
+
+  <p>
+    <em>
+      The Netflix behavioral proxy framework is described in their engineering blog:
+      <a href="https://netflixtechblog.com/recommending-for-long-term-member-satisfaction-at-netflix-ac15cada49ef" target="_blank" rel="noopener">Recommending for Long-Term Member Satisfaction</a>.
+      The Amazon NCX return metric is documented in Amazon Seller Central.
+      The proxy variable definition comes from the
+      <a href="https://methods.sagepub.com/reference/the-sage-encyclopedia-of-social-science-research-methods/n768.xml" target="_blank" rel="noopener">SAGE Encyclopedia of Social Science Research Methods</a>.
+      Goodhart's Law was formulated by economist Charles Goodhart in 1975.
+    </em>
+  </p>
+
+</article>
+
+<div class="author-card">
+  <div class="author-card-inner">
+    <div class="author-label">Written by</div>
+    <div class="author-name">Maria Ascolese</div>
+    <p class="author-bio">
+      Data scientist, R developer, and co-founder & CTO of
+      <a href="https://namidi.it" target="_blank" rel="noopener">nami data intelligence</a>.
+      I write about data science, political analytics, and the creative side of working with numbers.
+    </p>
+  </div>
+</div>
+
+<nav class="post-nav" aria-label="Post navigation">
+  <a href="/blog/">← All posts</a>
+</nav>
+
+<footer>
+  <a href="/">← Maria Ascolese</a>
+  <span>© 2025 Maria Ascolese</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Dec'];
+  new Chart(document.getElementById('goodhartChart'), {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [
+        {
+          label: 'Proxy metric score',
+          data: [42, 48, 53, 61, 67, 73, 79, 84, 88, 91, 94],
+          borderColor: '#c85a2a',
+          backgroundColor: 'rgba(200,90,42,0.06)',
+          borderWidth: 2,
+          pointRadius: 3,
+          pointBackgroundColor: '#c85a2a',
+          tension: 0.4,
+          fill: true,
+        },
+        {
+          label: 'Correlation with underlying concept',
+          data: [88, 87, 85, 80, 74, 66, 57, 49, 42, 37, 32],
+          borderColor: '#8a8278',
+          backgroundColor: 'transparent',
+          borderWidth: 1.5,
+          borderDash: [5, 4],
+          pointRadius: 3,
+          pointBackgroundColor: '#8a8278',
+          tension: 0.4,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            font: { family: "'DM Mono', monospace", size: 10 },
+            color: '#8a8278',
+            usePointStyle: true,
+            pointStyle: 'rect',
+            padding: 16,
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}`
+          }
+        },
+        annotation: {}
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 100,
+          ticks: {
+            font: { family: "'DM Mono', monospace", size: 11 },
+            color: '#8a8278',
+            callback: (v) => v
+          },
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          border: { color: '#d8d2cb' }
+        },
+        x: {
+          ticks: {
+            font: { family: "'DM Sans', sans-serif", size: 12 },
+            color: '#2a2825',
+            autoSkip: false,
+          },
+          grid: { display: false },
+          border: { color: '#d8d2cb' }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
