@@ -804,19 +804,18 @@
         </div>
         <a href="blog/" class="btn-ghost">All posts →</a>
       </div>
-
+ 
       <div class="blog-categories fade-up">
         <span class="category-tag active">All</span>
         <span class="category-tag">Data Visualization</span>
         <span class="category-tag">Machine Learning</span>
-        <span class="category-tag">Python and R</span>
+        <span class="category-tag">R</span>
         <span class="category-tag">Data & Culture</span>
         <span class="category-tag">Political Analytics</span>
       </div>
-
-      <div class="blog-empty fade-up">
-        <div class="blog-empty-icon">∅</div>
-        <p>Posts coming soon — check back.</p>
+ 
+      <div class="blog-grid fade-up" id="blog-grid">
+        <!-- populated by posts.json -->
       </div>
     </div>
   </section>
@@ -885,7 +884,7 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 20);
     });
-
+ 
     // Intersection observer for fade-up
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -895,8 +894,32 @@
         }
       });
     }, { threshold: 0.12 });
-
+ 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+ 
+    // Dynamic blog grid from posts.json
+    fetch('blog/posts.json')
+      .then(r => r.json())
+      .then(posts => {
+        const grid = document.getElementById('blog-grid');
+        const shown = posts.slice(0, 4);
+        grid.innerHTML = shown.map(p => `
+          <a href="blog/${p.slug}/" class="blog-card">
+            <div class="blog-card-meta">
+              <span>${p.dateLabel}</span>
+              <span class="blog-card-tag">${p.tag}</span>
+            </div>
+            <div class="blog-card-title">${p.title}</div>
+            <p class="blog-card-excerpt">${p.excerpt}</p>
+            <span class="blog-card-read">Read →</span>
+          </a>
+        `).join('');
+        observer.observe(grid);
+      })
+      .catch(() => {
+        document.getElementById('blog-grid').innerHTML =
+          '<p style="font-family:var(--mono);font-size:0.72rem;color:var(--mid);">Posts coming soon.</p>';
+      });
   </script>
 </body>
 </html>
