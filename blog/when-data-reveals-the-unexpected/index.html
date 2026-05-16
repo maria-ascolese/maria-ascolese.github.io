@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>When the Data Reveals the Unexpected: Hidden Patterns in Human Behavior — Maria Ascolese</title>
+  <meta name="description" content="Some of the most powerful data discoveries happen when numbers reveal something about human behavior that no one thought to look for. Rain and reviews, hurricanes and Pop-Tarts, sunshine and stock markets." />
+  <meta name="author" content="Maria Ascolese" />
+  <link rel="canonical" href="https://maria-ascolese.github.io/blog/when-data-reveals-the-unexpected/" />
+
+  <meta property="og:title" content="When the Data Reveals the Unexpected: Hidden Patterns in Human Behavior" />
+  <meta property="og:description" content="Rain makes your reviews worse. Hurricanes spike Pop-Tart sales. Sunshine moves stock markets. What these discoveries share — and what they teach us about data." />
+  <meta property="og:url" content="https://maria-ascolese.github.io/blog/when-data-reveals-the-unexpected/" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2025-02-10T00:00:00Z" />
+  <meta property="article:author" content="Maria Ascolese" />
+  <meta property="article:tag" content="Data Science" />
+  <meta property="article:tag" content="Behavioral Analytics" />
+  <meta property="article:tag" content="Data Visualization" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="When the Data Reveals the Unexpected" />
+  <meta name="twitter:description" content="Rain makes your reviews worse. Hurricanes spike Pop-Tart sales. What these discoveries share — and what they teach us about data." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "When the Data Reveals the Unexpected: Hidden Patterns in Human Behavior",
+    "description": "Some of the most powerful data discoveries happen when numbers reveal something about human behavior that no one thought to look for.",
+    "author": {
+      "@type": "Person",
+      "name": "Maria Ascolese",
+      "url": "https://maria-ascolese.github.io/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Maria Ascolese"
+    },
+    "datePublished": "2025-02-10",
+    "dateModified": "2025-02-10",
+    "url": "https://maria-ascolese.github.io/blog/when-data-reveals-the-unexpected/",
+    "keywords": ["unexpected data insights", "hidden patterns data science", "behavioral analytics", "data science human behavior", "surprising data discoveries"],
+    "articleSection": "Data Science"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0f0e0d;
+      --paper: #f5f2ee;
+      --mid: #8a8278;
+      --accent: #c85a2a;
+      --accent-soft: #f0e0d8;
+      --border: #d8d2cb;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(245,242,238,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .article-header {
+      padding: 9rem 3rem 4rem;
+      max-width: 780px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .article-tag { color: var(--accent); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .article-title em { font-style: italic; color: var(--accent); }
+
+    .article-lead {
+      font-size: 1.1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 55ch;
+    }
+
+    .article-body {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 300;
+      margin: 3.5rem 0 1rem;
+      line-height: 1.2;
+    }
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      font-style: italic;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--mid);
+    }
+    .article-body p {
+      margin-bottom: 1.5rem;
+      line-height: 1.85;
+      color: #2a2825;
+      font-size: 1.02rem;
+    }
+    .article-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-soft);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+    }
+    .article-body a:hover { text-decoration-color: var(--accent); }
+    .article-body strong { font-weight: 500; color: var(--ink); }
+    .article-body em { font-style: italic; }
+    .article-body ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .article-body li {
+      margin-bottom: 0.6rem;
+      line-height: 1.8;
+      color: #2a2825;
+      font-size: 1.02rem;
+    }
+    .article-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 0 1rem 2rem;
+      margin: 2.5rem 0;
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    /* ── CHART CONTAINER ── */
+    .chart-block {
+      margin: 3rem 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+    .chart-title {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.5rem;
+    }
+    .chart-subtitle {
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .chart-source {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      margin-top: 1rem;
+    }
+    .chart-source a { color: var(--mid); }
+
+    /* ── CASE CARDS ── */
+    .case-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+    }
+    .case-number {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .case-card h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-style: normal;
+      color: var(--ink);
+      margin: 0 0 1rem;
+    }
+    .case-card p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+    .case-stat {
+      display: inline-block;
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.8rem;
+      margin: 0.75rem 0;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--ink);
+    }
+
+    .article-divider {
+      text-align: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin: 3rem 0;
+      letter-spacing: 0.5em;
+    }
+
+    .author-card {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+    }
+    .author-card-inner {
+      background: var(--accent-soft);
+      padding: 2rem 2.5rem;
+    }
+    .author-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .author-name {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .author-bio {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+    .author-bio a { color: var(--accent); text-decoration: none; }
+    .author-bio a:hover { text-decoration: underline; }
+
+    .post-nav {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+    .post-nav a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .post-nav a:hover { color: var(--ink); }
+
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+    }
+    footer span, footer a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--mid);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .article-header, .article-body, .author-card, .post-nav { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Maria Ascolese</a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/blog/">Writing</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="article-header">
+  <div class="article-meta">
+    <span>10 February 2025</span>
+    <span class="article-tag">Data Science</span>
+    <span class="article-tag">Behavioral Analytics</span>
+    <span>7 min read</span>
+  </div>
+  <h1 class="article-title">When the Data Reveals <em>the Unexpected</em></h1>
+  <p class="article-lead">
+    Some of the most powerful discoveries in data science happen when the numbers reveal something
+    about human behavior that nobody thought to look for. These are my favorite kind.
+  </p>
+</header>
+
+<article class="article-body">
+
+  <p>
+    There is a particular kind of satisfaction that comes from a finding nobody asked for.
+    You are looking at data for one reason — customer satisfaction, sales forecasting,
+    supply chain optimization — and the numbers show you something else entirely.
+    Something about how people actually behave, as opposed to how they say they do,
+    or how we assumed they would.
+  </p>
+
+  <p>
+    These discoveries don't come from hypothesis testing. They come from being genuinely
+    curious about the residuals: the variance that your model doesn't explain,
+    the pattern that shouldn't be there. The question underneath all of them is the same:
+    <em>what else is going on?</em>
+  </p>
+
+  <p>
+    Here are three cases I keep coming back to. Each one surprised the people who found it.
+    Each one, in retrospect, makes complete sense.
+  </p>
+
+  <h2>Case 1: Rain makes your reviews worse</h2>
+
+  <div class="case-card">
+    <div class="case-number">Finding 01</div>
+    <h3>Hotel guests rate their stay lower when it's raining — at home, weeks later.</h3>
+    <div class="case-stat">6.5% more reviews written on rainy days · ratings 0.1 stars lower on average</div>
+    <p>
+      Research by Yaniv Dover (Hebrew University of Jerusalem) and Leif Brandes (University of Lucerne),
+      based on 340,000 hotel reviews linked to 12 years of weather data, found that
+      people are significantly more likely to write a review on a rainy day —
+      and when they do, they rate their past experience lower.
+      The weather during the hotel stay itself had no effect.
+      The weather on the day they sat down to write the review did.
+    </p>
+  </div>
+
+  <p>
+    This is a result that would have been invisible to anyone analyzing satisfaction scores alone.
+    You'd see variance. You'd assume it was noise. It is only when you join the review data
+    to an external dataset — in this case, historical weather records — that the pattern emerges.
+  </p>
+
+  <p>
+    The mechanism is well-documented in psychology: bad weather activates negative memories
+    and frames the emotional context in which we recall experiences.
+    We are not rating the hotel. We are rating the hotel <em>as recalled from a rainy Tuesday afternoon.</em>
+    The 0.1-star difference is enough, on average, to account for 59% of the rating gap
+    between four- and five-star hotels in the dataset.
+  </p>
+
+  <div class="chart-block">
+    <div class="chart-title">Simulated review rating distribution</div>
+    <div class="chart-subtitle">Average hotel ratings shift downward on rainy days — based on findings from Dover & Brandes (2022)</div>
+    <div style="position: relative; width: 100%; height: 260px;">
+      <canvas id="rainChart" role="img" aria-label="Bar chart comparing average hotel review ratings on sunny versus rainy days. Sunny days average 4.3 stars, rainy days average 4.2 stars, a difference of 0.1 points.">Sunny days: ~4.3 stars average. Rainy days: ~4.2 stars average. The 0.1-point gap accounts for 59% of the rating difference between 4- and 5-star hotels.</canvas>
+    </div>
+    <div class="chart-source">
+      Source: Dover & Brandes (2022), "Rain, rain, go away" — Hebrew University of Jerusalem / University of Lucerne.
+      Chart is illustrative based on reported findings.
+    </div>
+  </div>
+
+  <p>
+    The practical implication is uncomfortable for any business that relies on review scores
+    as a quality signal: your ratings are partly a function of the weather in your customers' cities
+    on the day they happened to open the review platform. You cannot control this.
+    But you can stop treating your average score as a pure measure of quality.
+  </p>
+
+  <h2>Case 2: A hurricane is about to hit — stock up on Pop-Tarts</h2>
+
+  <div class="case-card">
+    <div class="case-number">Finding 02</div>
+    <h3>Before Hurricane Frances in 2004, Walmart discovered that strawberry Pop-Tart sales rose 7x ahead of a storm.</h3>
+    <div class="case-stat">7× normal sales rate for strawberry Pop-Tarts pre-hurricane · beer was the #1 pre-storm item overall</div>
+    <p>
+      Walmart's then-chief information officer Linda Dillman described the finding to the New York Times:
+      by mining historical sales data across recent hurricane events,
+      the company found that before a storm, customers reliably bought strawberry Pop-Tarts
+      at seven times the normal rate. Nobody predicted this. No marketing team planned for it.
+      The data found it.
+    </p>
+  </div>
+
+  <p>
+    The logic is clear once you see it: Pop-Tarts don't require refrigeration, don't need cooking,
+    are high-calorie, and last indefinitely. They are, functionally, a perfect emergency food.
+    But nobody would have predicted this from first principles.
+    A category manager thinking about hurricane preparation would have thought about water, batteries,
+    canned goods. Not a children's breakfast pastry.
+  </p>
+
+  <p>
+    What Walmart did next is the interesting part. They loaded trucks with strawberry Pop-Tarts
+    and sent them toward the path of Hurricane Frances before it hit.
+    They had turned a pattern in historical data into a logistical decision.
+    This is what it looks like when data discovery becomes operational.
+  </p>
+
+  <blockquote>
+    Nobody predicted this from first principles. The data found it.
+    And once found, it was immediately useful.
+  </blockquote>
+
+  <p>
+    The broader point is about the shape of useful questions in retail analytics.
+    The obvious questions — what sells most, what has the highest margin, what's trending —
+    all assume you already know which products matter.
+    The less obvious question — under what conditions does the composition of a shopping basket
+    change in predictable, non-intuitive ways — is harder to ask but reveals something
+    you can actually act on.
+  </p>
+
+  <h2>Case 3: Sunshine moves stock markets</h2>
+
+  <div class="case-card">
+    <div class="case-number">Finding 03</div>
+    <h3>Market returns are systematically lower on cloudy days — across multiple countries and decades of data.</h3>
+    <div class="case-stat">Sunshine effect documented across US, UK, Germany, Japan, and 22 other markets · effect too small to profit from, but statistically robust</div>
+    <p>
+      A growing body of research in behavioral finance, including work published in the
+      Journal of Finance and later replicated across 26 international markets,
+      finds that stock market returns are measurably higher on sunny days than cloudy ones.
+      The effect is small — not enough to build a trading strategy around — but it is persistent,
+      it survives controls for seasonality and other confounds, and it appears across
+      geographies and time periods.
+    </p>
+  </div>
+
+  <p>
+    The mechanism is the same as the rain-and-reviews case: mood shapes judgment,
+    and ambient conditions shape mood. Traders in a better mood are marginally
+    more optimistic, slightly more risk-tolerant, and a little more likely to buy.
+    Aggregated across millions of transactions, the signal becomes measurable.
+  </p>
+
+  <div class="chart-block">
+    <div class="chart-title">Weather and market mood — illustrative</div>
+    <div class="chart-subtitle">How ambient conditions influence the emotional state of decision-makers, which aggregates into measurable market signals</div>
+    <div style="position: relative; width: 100%; height: 300px;">
+      <canvas id="moodChart" role="img" aria-label="Diagram showing how weather conditions influence mood, which then influences risk tolerance and market returns. Sunny conditions correlate with higher returns; overcast conditions with lower returns.">Conceptual model: Weather conditions influence mood states (positive/negative), which in turn influence risk tolerance and buying behavior, which aggregates into observable market return differentials.</canvas>
+    </div>
+    <div class="chart-source">
+      Based on: Hirshleifer & Shumway (2003), Journal of Finance; replicated across 26 markets.
+      Chart is illustrative and schematic.
+    </div>
+  </div>
+
+  <p>
+    What this finding exposes is the gap between the model of markets as rational price-discovery
+    mechanisms and the reality of markets as the aggregate behavior of human beings
+    sitting at desks, looking out windows, having good days and bad ones.
+    The efficient market hypothesis has no variable for cloud cover.
+    The data does.
+  </p>
+
+  <h2>What these three cases share</h2>
+
+  <p>
+    None of these findings came from someone asking the right question. They came from someone
+    looking at the data without a fixed hypothesis and noticing something that didn't fit
+    the expected pattern. This is different from exploratory data analysis in the conventional sense —
+    it's not just running correlations until something comes up. It requires a certain posture:
+    genuine curiosity about what the data is trying to tell you, rather than what you already
+    believe it should say.
+  </p>
+
+  <p>
+    All three also share the same underlying structure: a human behavior (writing a review,
+    buying groceries, placing a trade) that we treat as if it were purely rational,
+    and that turns out to be significantly shaped by context we weren't measuring.
+    The rain, the hurricane, the sunshine. None of these are in the model.
+    All of them affect the outcome.
+  </p>
+
+  <p>
+    The most useful data projects I've worked on have had this quality: at some point,
+    something in the analysis surprises everyone in the room. That surprise is a signal.
+    It means the data contains more than your prior assumptions did.
+    That gap — between what you expected and what you found — is often where the actual value is.
+  </p>
+
+  <div class="article-divider">· · ·</div>
+
+  <p>
+    <em>
+      The rain-and-reviews finding comes from research by
+      <a href="https://www.jpost.com/health-and-wellness/mind-and-spirit/article-714437" target="_blank" rel="noopener">
+        Dover and Brandes (Hebrew University / University of Lucerne)</a>,
+      based on 340,000 reviews and 12 years of weather data.
+      The Walmart Pop-Tarts case was reported by the
+      <a href="https://www.nytimes.com/2004/11/14/business/yourmoney/what-walmart-knows-about-customers-habits.html" target="_blank" rel="noopener">
+        New York Times in 2004</a>.
+      The sunshine and stock returns finding originates with
+      <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5544238/" target="_blank" rel="noopener">
+        Hirshleifer & Shumway (2003)</a>,
+      Journal of Finance, replicated across 26 markets.
+    </em>
+  </p>
+
+</article>
+
+<div class="author-card">
+  <div class="author-card-inner">
+    <div class="author-label">Written by</div>
+    <div class="author-name">Maria Ascolese</div>
+    <p class="author-bio">
+      Data scientist, R developer, and co-founder & CTO of
+      <a href="https://namidi.it" target="_blank" rel="noopener">nami data intelligence</a>.
+      I write about data science, political analytics, and the creative side of working with numbers.
+    </p>
+  </div>
+</div>
+
+<nav class="post-nav" aria-label="Post navigation">
+  <a href="/blog/">← All posts</a>
+</nav>
+
+<footer>
+  <a href="/">← Maria Ascolese</a>
+  <span>© 2025 Maria Ascolese</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+  /* ── Chart 1: Rain vs sunny ratings ── */
+  new Chart(document.getElementById('rainChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Sunny days', 'Overcast days', 'Rainy days'],
+      datasets: [{
+        label: 'Average hotel rating (out of 5)',
+        data: [4.35, 4.27, 4.25],
+        backgroundColor: ['#e8c49a', '#c8bfb5', '#7a9cbf'],
+        borderColor: ['#c85a2a', '#8a8278', '#3a6080'],
+        borderWidth: 1.5,
+        borderRadius: 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` ${ctx.parsed.y.toFixed(2)} stars`
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 4.1,
+          max: 4.5,
+          ticks: {
+            font: { family: "'DM Mono', monospace", size: 11 },
+            color: '#8a8278',
+            callback: (v) => v.toFixed(2) + '★'
+          },
+          grid: { color: 'rgba(0,0,0,0.06)' },
+          border: { color: '#d8d2cb' }
+        },
+        x: {
+          ticks: {
+            font: { family: "'DM Sans', sans-serif", size: 12 },
+            color: '#2a2825'
+          },
+          grid: { display: false },
+          border: { color: '#d8d2cb' }
+        }
+      }
+    }
+  });
+
+  /* ── Chart 2: Mood pathway diagram as horizontal bar ── */
+  new Chart(document.getElementById('moodChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Sunny', 'Partly cloudy', 'Overcast', 'Rainy'],
+      datasets: [
+        {
+          label: 'Positive mood index',
+          data: [82, 65, 50, 38],
+          backgroundColor: '#e8c49a',
+          borderColor: '#c85a2a',
+          borderWidth: 1.5,
+          borderRadius: 2,
+        },
+        {
+          label: 'Risk tolerance index',
+          data: [76, 60, 47, 35],
+          backgroundColor: '#a8c4d8',
+          borderColor: '#3a6080',
+          borderWidth: 1.5,
+          borderRadius: 2,
+          borderDash: [4, 4],
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            font: { family: "'DM Mono', monospace", size: 10 },
+            color: '#8a8278',
+            usePointStyle: true,
+            pointStyle: 'rect',
+            padding: 16
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}`
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 100,
+          ticks: {
+            font: { family: "'DM Mono', monospace", size: 11 },
+            color: '#8a8278',
+            callback: (v) => v
+          },
+          grid: { color: 'rgba(0,0,0,0.06)' },
+          border: { color: '#d8d2cb' }
+        },
+        x: {
+          ticks: {
+            font: { family: "'DM Sans', sans-serif", size: 12 },
+            color: '#2a2825'
+          },
+          grid: { display: false },
+          border: { color: '#d8d2cb' }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
