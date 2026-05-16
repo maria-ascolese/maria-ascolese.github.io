@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "when-data-reveals-the-unexpected",
+    "title": "When the Data Reveals the Unexpected",
+    "excerpt": "Rain makes your reviews worse. Hurricanes spike Pop-Tart sales sevenfold. Sunshine moves stock markets. What these discoveries share — and what they teach us about data.",
+    "date": "2025-02-10",
+    "dateLabel": "10 Feb 2025",
+    "tag": "Data Science"
+  },
+  {
+    "slug": "what-does-a-data-scientist-do-in-a-political-campaign",
+    "title": "What Does a Data Scientist Actually Do in a Political Campaign?",
+    "excerpt": "Not poll aggregation. Not election forecasting. The real work is messier, more creative, and far more interesting than the public narrative suggests.",
+    "date": "2025-01-15",
+    "dateLabel": "15 Jan 2025",
+    "tag": "Political Analytics"
+  }
+]
