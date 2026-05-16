@@ -1,5 +1,13 @@
 [
   {
+    "slug": "how-to-measure-the-unmeasurable",
+    "title": "How to Measure the Unmeasurable",
+    "excerpt": "You can't measure trust, satisfaction, or quality directly. But you can measure things that reliably track them. Proxy variables are the most creative tool in data science — and the most misused.",
+    "date": "2025-03-05",
+    "dateLabel": "5 Mar 2025",
+    "tag": "Data Science"
+  },
+  {
     "slug": "when-data-reveals-the-unexpected",
     "title": "When the Data Reveals the Unexpected",
     "excerpt": "Rain makes your reviews worse. Hurricanes spike Pop-Tart sales sevenfold. Sunshine moves stock markets. What these discoveries share — and what they teach us about data.",
